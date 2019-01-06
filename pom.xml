@@ -20,6 +20,7 @@
         <module>flink-utils</module>
         <module>flink-105</module>
 		<module>kafka-connect-github</module>
+		<module>kafka-avro</module>
     </modules>
 	<packaging>pom</packaging>
 
