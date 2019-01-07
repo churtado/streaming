@@ -1,0 +1,1 @@
+Make sure you use the avro tools jar with the commands in the shell script
