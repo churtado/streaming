@@ -33,6 +33,7 @@
     <orderEntry type="library" name="Maven: jline:jline:0.9.94" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty:3.10.5.Final" level="project" />
     <orderEntry type="library" name="Maven: com.101tec:zkclient:0.10" level="project" />
+    <orderEntry type="module" module-name="avro-examples" />
     <orderEntry type="library" name="Maven: org.apache.flink:flink-java:1.7.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.flink:flink-core:1.7.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.flink:flink-annotations:1.7.0" level="project" />

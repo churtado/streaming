@@ -14,9 +14,28 @@
 
     <properties>
         <avro.version>1.8.2</avro.version>
+        <!-- Keep versions as properties to allow easy modification -->
+        <confluent.version>5.0.0</confluent.version>
+        <kafka.version>2.0.0-cp1</kafka.version>
+        <avro.version>1.8.2</avro.version>
+        <!-- Maven properties for compilation -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <confluent.version>5.0.0</confluent.version>
     </properties>
-
-
+    <repositories>
+        <repository>
+            <id>confluent</id>
+            <name>Confluent</name>
+            <url>https://packages.confluent.io/maven/</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>confluent</id>
+            <url>https://packages.confluent.io/maven/</url>
+        </pluginRepository>
+    </pluginRepositories>
     <dependencies>
         <!--Only dependency needed for the avro part-->
         <!-- https://mvnrepository.com/artifact/org.apache.avro/avro -->
@@ -25,7 +44,16 @@
             <artifactId>avro</artifactId>
             <version>${avro.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-avro-serializer</artifactId>
+            <version>${confluent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>${kafka.version}</version>
+        </dependency>
     </dependencies>
 
 
@@ -65,6 +93,22 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>io.confluent</groupId>
+                <artifactId>kafka-schema-registry-maven-plugin</artifactId>
+                <version>5.0.0</version>
+                <configuration>
+                    <schemaRegistryUrls>
+                        <param>http://localhost:8081</param>
+                    </schemaRegistryUrls>
+                    <subjects>
+                        <transactions-value>src/main/resources/avro/io/confluent/examples/clients/basicavro/Payment2a.avsc</transactions-value>
+                    </subjects>
+                </configuration>
+                <goals>
+                    <goal>test-compatibility</goal>
+                </goals>
+            </plugin>
             <!--force discovery of generated classes-->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -85,6 +129,7 @@
                     </execution>
                 </executions>
             </plugin>
+
         </plugins>
     </build>
 

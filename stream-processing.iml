@@ -51,5 +51,27 @@
     <orderEntry type="library" name="Maven: org.apache.flink:flink-clients_2.11:1.7.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.flink:flink-optimizer_2.11:1.7.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.flink:flink-shaded-guava:18.0-5.0" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES />
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/../schema-registry/avro-converter/src/main/java" />
+          <root url="file://$MODULE_DIR$/../schema-registry/avro-converter/src/test/java" />
+          <root url="file://$MODULE_DIR$/../schema-registry/avro-serde/src/main/java" />
+          <root url="file://$MODULE_DIR$/../schema-registry/avro-serde/src/test/java" />
+          <root url="file://$MODULE_DIR$/../schema-registry/avro-serializer/src/main/java" />
+          <root url="file://$MODULE_DIR$/../schema-registry/avro-serializer/src/test/java" />
+          <root url="file://$MODULE_DIR$/../schema-registry/client/src/main/java" />
+          <root url="file://$MODULE_DIR$/../schema-registry/client/src/test/java" />
+          <root url="file://$MODULE_DIR$/../schema-registry/core/src/main/java" />
+          <root url="file://$MODULE_DIR$/../schema-registry/core/src/test/java" />
+          <root url="file://$MODULE_DIR$/../schema-registry/json-serializer/src/main/java" />
+          <root url="file://$MODULE_DIR$/../schema-registry/json-serializer/src/test/java" />
+          <root url="file://$MODULE_DIR$/../schema-registry/maven-plugin/src/main/java" />
+          <root url="file://$MODULE_DIR$/../schema-registry/maven-plugin/src/test/java" />
+        </SOURCES>
+      </library>
+    </orderEntry>
   </component>
 </module>
