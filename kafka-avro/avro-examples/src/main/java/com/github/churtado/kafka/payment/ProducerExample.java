@@ -7,6 +7,14 @@ import org.apache.kafka.common.serialization.StringSerializer;
 
 import java.util.Properties;
 
+/**
+ * The key thing to remember here is that I got this working for a confluent docker setup
+ * In order to get that working look at the yaml file in the avro folder at the root of
+ * this project, specifically cp-docker-images/examples/cp-all-in-one
+ * There, I changed the <ADVERTISED*> variables in the yaml file to point to the ip
+ * address of the actual host, not the container. It's most important for the broker
+ */
+
 public class ProducerExample {
 
     public static void main(String[] args) {
