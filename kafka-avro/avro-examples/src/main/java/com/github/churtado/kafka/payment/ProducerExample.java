@@ -13,7 +13,7 @@ public class ProducerExample {
 
         Properties properties = new Properties();
         // normal producer
-        properties.setProperty("bootstrap.servers", "192.168.1.:9092");
+        properties.setProperty("bootstrap.servers", "192.168.1.148:9092");
         properties.setProperty("acks", "all");
         properties.setProperty("retries", "10");
         // avro part

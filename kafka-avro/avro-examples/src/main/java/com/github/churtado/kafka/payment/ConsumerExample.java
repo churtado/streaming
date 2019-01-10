@@ -19,7 +19,7 @@ public class ConsumerExample {
     public static void main(final String[] args) {
         final Properties properties = new Properties();
         // normal consumer
-        properties.setProperty("bootstrap.servers","localhost:9092");
+        properties.setProperty("bootstrap.servers","192.168.1.148:9092");
         properties.put("group.id", "transaction-consumer-group-v1");
         properties.put("auto.commit.enable", "false");
         properties.put("auto.offset.reset", "earliest");
