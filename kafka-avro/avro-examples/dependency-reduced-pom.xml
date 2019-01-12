@@ -40,6 +40,22 @@
         </executions>
       </plugin>
       <plugin>
+        <groupId>io.confluent</groupId>
+        <artifactId>kafka-schema-registry-maven-plugin</artifactId>
+        <version>5.0.0</version>
+        <goals>
+          <goal>test-compatibility</goal>
+        </goals>
+        <configuration>
+          <schemaRegistryUrls>
+            <param>http://localhost:8081</param>
+          </schemaRegistryUrls>
+          <subjects>
+            <transactions-value>src/main/resources/avro/io/confluent/examples/clients/basicavro/Payment2a.avsc</transactions-value>
+          </subjects>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
         <version>3.0.0</version>
@@ -67,6 +83,12 @@
       <url>https://packages.confluent.io/maven/</url>
     </repository>
   </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>confluent</id>
+      <url>https://packages.confluent.io/maven/</url>
+    </pluginRepository>
+  </pluginRepositories>
   <properties>
     <avro.version>1.8.2</avro.version>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

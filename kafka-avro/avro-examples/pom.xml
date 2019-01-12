@@ -101,6 +101,9 @@
                     <schemaRegistryUrls>
                         <param>http://localhost:8081</param>
                     </schemaRegistryUrls>
+                    <outputDirectory>
+                        src/target/asdf
+                    </outputDirectory>
                     <subjects>
                         <transactions-value>src/main/resources/avro/io/confluent/examples/clients/basicavro/Payment2a.avsc</transactions-value>
                     </subjects>
