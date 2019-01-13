@@ -1,4 +1,4 @@
-package com.github.churtado.flink;
+package com.github.churtado.flink.kafka;
 
 import com.example.Customer;
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
@@ -15,7 +15,7 @@ import java.util.Properties;
  * go to the maven menu, can in lifecycle click on package
  */
 
-public class KafkaAvroProducer {
+public class Producer {
 
     public static void main(String[] args) {
 
