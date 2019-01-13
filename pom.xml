@@ -17,10 +17,10 @@
         <module>java-basics</module>
         <module>flink-201</module>
 		<module>flink-test-utils</module>
-        <module>flink-utils</module>
         <module>flink-105</module>
 		<module>kafka-connect-github</module>
 		<module>kafka-avro</module>
+		<module>flink-202</module>
 	</modules>
 	<packaging>pom</packaging>
 
