@@ -79,12 +79,8 @@ public class AvroTests {
     public void testProduceKafkaAvroData() throws Exception {
 
         /**
-         * This is fucking easy. Create an actual kafka producer and
-         * produce the data that you've consumed out using a
-         * conventional kafka producer. You can make it use transactions
-         * and all. What you would have to do is make sure you put
-         * it in a process step or something like that, or create
-         * your own custom sink to Kafka using avro.
+         * You may have to create your own serializer. Look to the
+         * TweetSerializer class you created back in flink 201
          */
     }
 }
