@@ -1,12 +1,14 @@
 package com.github.churtado.flink;
 
 import com.example.Customer;
+import com.github.churtado.flink.kafka.ConfluentAvroSerializationSchema;
+import io.confluent.kafka.serializers.KafkaAvroDeserializerConfig;
 import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.restartstrategy.RestartStrategies;
 import org.apache.flink.formats.avro.registry.confluent.ConfluentRegistryAvroDeserializationSchema;
-import org.apache.flink.formats.avro.typeutils.AvroSerializer;
 import org.apache.flink.streaming.api.TimeCharacteristic;
+import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
@@ -25,9 +27,6 @@ import java.util.Properties;
 public class AvroTests {
 
     private StreamExecutionEnvironment env;
-    private FlinkKafkaConsumer011<Customer> consumer011;
-    private DataStreamSource<Customer> customers;
-    private FlinkKafkaProducer011<String> producer011;
 
     @BeforeEach
     public void setup(){
@@ -39,6 +38,11 @@ public class AvroTests {
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
         env.getConfig().setAutoWatermarkInterval(1000L);
         env.setParallelism(4);
+    }
+
+    @Test
+    @DisplayName("Testing consuming avro data from kafka")
+    public void testConsumeKafkaAvroData() throws Exception {
 
         // setup kafka consumer
         Properties config = new Properties();
@@ -49,21 +53,17 @@ public class AvroTests {
 
         String schemaRegistryUrl = "http://192.168.1.151:8081";
 
-        consumer011 = new FlinkKafkaConsumer011<Customer>(
+        FlinkKafkaConsumer011<Customer> consumer011 = new FlinkKafkaConsumer011<Customer>(
                 "customer-flink",
                 ConfluentRegistryAvroDeserializationSchema.forSpecific(Customer.class, schemaRegistryUrl),
                 config);
         consumer011.setStartFromEarliest();
 
-        customers = env.addSource(consumer011);
 
-        AvroSerializer<Customer> serializer = new AvroSerializer<>(Customer.class);
 
-    }
+        // create a stream and consume from kafka using schema registry
 
-    @Test
-    @DisplayName("Testing consuming avro data from kafka")
-    public void testConsumeKafkaAvroData() throws Exception {
+        DataStreamSource<Customer> customers = env.addSource(consumer011);
 
         SingleOutputStreamOperator<String> mapToString = customers
                 .map((MapFunction<Customer, String>) SpecificRecordBase::toString);
@@ -78,9 +78,48 @@ public class AvroTests {
     @DisplayName("Testing consuming avro data from kafka")
     public void testProduceKafkaAvroData() throws Exception {
 
-        /**
-         * You may have to create your own serializer. Look to the
-         * TweetSerializer class you created back in flink 201
-         */
+        // setup producer
+        String topic = "customer-flink";
+        String brokerList = "192.168.1.151:9092";
+        String registryUrl = "http://192.168.1.151:8081";
+        int identityMapCapacity = 1000;
+
+        //schema registry
+        Properties registryProperties = new Properties();
+        registryProperties.put(KafkaAvroDeserializerConfig.SCHEMA_REGISTRY_URL_CONFIG, registryUrl);
+
+        // set an ID field at some point
+        Customer customer1 = Customer.newBuilder()
+                .setPhoneNumber("123456")
+                .setAge(1)
+                .setFirstName("Carlos")
+                .setLastName("Hurtado")
+                .setWeight(1)
+                .setHeight(1)
+                .setEmail("charliepapa@gmail.com")
+                .build();
+
+        Customer customer2 = Customer.newBuilder()
+                .setPhoneNumber("654321")
+                .setAge(2)
+                .setFirstName("Bob")
+                .setLastName("Robertson")
+                .setWeight(2)
+                .setHeight(2)
+                .setEmail("charliepapa2@gmail.com")
+                .build();
+
+        DataStream<Customer> customerStream = env.fromElements(customer1, customer2);
+
+        //serialize avro
+        ConfluentAvroSerializationSchema serializationSchema = new ConfluentAvroSerializationSchema<Customer>(topic, "http://192.168.1.151:8081", 1000);
+
+        //write to kafka
+        FlinkKafkaProducer011<Customer> producer011 = new FlinkKafkaProducer011<Customer>(brokerList, topic, serializationSchema);
+
+        customerStream.addSink(producer011);
+
+        // execute flink
+        env.execute();
     }
 }

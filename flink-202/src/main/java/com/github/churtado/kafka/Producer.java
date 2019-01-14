@@ -1,4 +1,4 @@
-package com.github.churtado.flink.kafka;
+package com.github.churtado.kafka;
 
 import com.example.Customer;
 import io.confluent.kafka.serializers.KafkaAvroSerializer;

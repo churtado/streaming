@@ -1,7 +1,8 @@
-package com.github.churtado.flink.kafka;
+package com.github.churtado.kafka;
 
 import com.example.Customer;
 import io.confluent.kafka.serializers.KafkaAvroDeserializer;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -25,15 +26,16 @@ public class Consumer {
         properties.setProperty("value.deserializer", KafkaAvroDeserializer.class.getName());
         properties.setProperty("schema.registry.url", "http://127.0.0.1:8081");
         properties.setProperty("specific.avro.reader", "true");
+        properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 
         KafkaConsumer<String, Customer> kafkaConsumer = new KafkaConsumer<>(properties);
-        String topic = "customer-avro";
+        String topic = "customer-flink";
         kafkaConsumer.subscribe(Collections.singleton(topic));
 
         System.out.println("Waiting for data...");
 
         while (true){
-            System.out.println("Polling");
+            // System.out.println("Polling");
             ConsumerRecords<String, Customer> records = kafkaConsumer.poll(1000);
 
             for (ConsumerRecord<String, Customer> record : records){
