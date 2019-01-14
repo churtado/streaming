@@ -50,13 +50,7 @@ public class AsyncLookupTest {
     }
 
     /**
-     * Async lookup to an external data source        <dependency>
-            <groupId>stream-processing</groupId>
-            <artifactId>flink-utils</artifactId>
-            <version>1.0</version>
-            <scope>test</scope>
-        </dependency>
-
+     * Async lookup to an external data source
      * to enrich it. Because it's async, the stream won't wait to keep
      * processing data, and once it gets back the external result it
      * will keep pushing the enriched data. External systems must be able
@@ -64,6 +58,10 @@ public class AsyncLookupTest {
      * threads that send requests.
      *
      * The order of the data can be maintained in flink, or you can disregard it
+     *
+     * I believe the table is just a list of the sensors by name, and a color field.
+     * So, every sensor (in the case of our data source it has 10 at the moment of
+     * writing) has a unique color: (sensor_1, red), (sensor_2, blue),....
      */
     @Test
     @DisplayName("Testing influxdb sink")
