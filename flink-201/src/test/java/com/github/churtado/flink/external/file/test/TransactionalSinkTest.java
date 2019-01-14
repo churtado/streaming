@@ -50,10 +50,10 @@ public class TransactionalSinkTest {
     }
 
     /**
-     * InfluxDB sink with our sensor reading source
+     * 2PC file sink with our sensor reading source
      */
     @Test
-    @DisplayName("Testing influxdb sink")
+    @DisplayName("Testing 2PC file sink")
     public void TestTransactionalFileSink() throws Exception {
         readings
                 .map(new MapFunction<SensorReading, Tuple2<String, Double>>() {

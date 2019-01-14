@@ -5,6 +5,7 @@ import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.restartstrategy.RestartStrategies;
 import org.apache.flink.formats.avro.registry.confluent.ConfluentRegistryAvroDeserializationSchema;
+import org.apache.flink.formats.avro.typeutils.AvroSerializer;
 import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
@@ -56,11 +57,8 @@ public class AvroTests {
 
         customers = env.addSource(consumer011);
 
-        // setup kafka producer
-//        producer011 = new FlinkKafkaProducer011<>(
-//                "customer-avro-string",
-//                new ConfluentRegistryAvroSerializationSchema(),
-//                config);
+        AvroSerializer<Customer> serializer = new AvroSerializer<>(Customer.class);
+
     }
 
     @Test
@@ -80,18 +78,13 @@ public class AvroTests {
     @DisplayName("Testing consuming avro data from kafka")
     public void testProduceKafkaAvroData() throws Exception {
 
-        Customer customer = Customer.newBuilder()
-                .setFirstName("Jane")
-                .setLastName("Doe")
-                .setAge(26)
-                .setHeight(185.5f)
-                .setWeight(85.6f)
-                .setPhoneNumber("123-1232-4654")
-                .setEmail("john.doe@email.com")
-                .build();
-
-
-        env.execute();
-
+        /**
+         * This is fucking easy. Create an actual kafka producer and
+         * produce the data that you've consumed out using a
+         * conventional kafka producer. You can make it use transactions
+         * and all. What you would have to do is make sure you put
+         * it in a process step or something like that, or create
+         * your own custom sink to Kafka using avro.
+         */
     }
 }
