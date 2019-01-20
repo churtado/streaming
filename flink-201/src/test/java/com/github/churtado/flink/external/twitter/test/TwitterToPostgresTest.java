@@ -70,7 +70,7 @@ public class TwitterToPostgresTest {
         env.setParallelism(1);
 
         Properties properties = new Properties();
-        properties.setProperty("bootstrap.servers", "localhost:9092");
+        properties.setProperty("bootstrap.servers", "localhost:29092");
 
         // only required for Kafka 0.8
         // properties.setProperty("zookeeper.connect", "localhost:2181");
@@ -135,7 +135,7 @@ public class TwitterToPostgresTest {
 
 
         Properties props = new Properties();
-        props.setProperty("bootstrap.servers", "localhost:9092");
+        props.setProperty("bootstrap.servers", "localhost:29092");
         // only required for Kafka 0.8
         props.setProperty("zookeeper.connect", "localhost:2181");
         props.setProperty("group.id", "AsyncLookupTest");

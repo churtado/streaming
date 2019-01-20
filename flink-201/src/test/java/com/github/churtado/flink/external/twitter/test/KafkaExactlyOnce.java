@@ -157,7 +157,7 @@ public class KafkaExactlyOnce {
 
         // ###############################  set up kafka consumer  ###############################
         Properties consumerProperties = new Properties();
-        consumerProperties.setProperty("bootstrap.servers", "localhost:9092");
+        consumerProperties.setProperty("bootstrap.servers", "localhost:29092");
 
         // only required for Kafka 0.8
         // properties.setProperty("zookeeper.connect", "localhost:2181");
@@ -175,7 +175,7 @@ public class KafkaExactlyOnce {
 
         // ###############################  set up kafka producer  ###############################
         Properties producerProperties = new Properties();
-        producerProperties.setProperty("bootstrap.servers","localhost:9092");
+        producerProperties.setProperty("bootstrap.servers","localhost:29092");
         producerProperties.setProperty("acks","all");
         producerProperties.setProperty("enable.idempotence","true");
         producerProperties.setProperty("retries","3");
@@ -262,7 +262,7 @@ public class KafkaExactlyOnce {
     }
 
     private KafkaProducer<String, String> createKafkaProducer(){
-        String bootstrapServers = "127.0.0.1:9092";
+        String bootstrapServers = "127.0.0.1:29092";
 
         // create Producer properties
         Properties properties = new Properties();
