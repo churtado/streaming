@@ -35,6 +35,11 @@ docker exec -it influxdb influx
 # create a user
 CREATE USER admin WITH PASSWORD 'password' WITH ALL PRIVILEGES;
 
+########### Setup twitter topic ##############
+kafka-topics --zookeeper zookeeper:2181 --create --topic twitter_tweets --partitions 6 --replication-factor 1
+
+
+
 
 ########### Misc
 To purge a kafka topic, set its retention policy to 1 second:

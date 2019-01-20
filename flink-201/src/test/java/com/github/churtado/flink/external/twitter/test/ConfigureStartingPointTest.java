@@ -43,10 +43,10 @@ public class ConfigureStartingPointTest {
         CollectSink.values.clear();
 
         Properties properties = new Properties();
-        properties.setProperty("bootstrap.servers", "localhost:9092");
+        properties.setProperty("bootstrap.servers", "localhost:29092");
 
         // only required for Kafka 0.8
-        properties.setProperty("zookeeper.connect", "localhost:2181");
+        // properties.setProperty("zookeeper.connect", "localhost:2181");
         properties.setProperty("group.id", "AsyncLookupTest");
 
         FlinkKafkaConsumer<String> consumer = new FlinkKafkaConsumer<String>("twitter_tweets", new SimpleStringSchema(), properties);
