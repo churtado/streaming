@@ -19,6 +19,11 @@ kafka-console-consumer --bootstrap-server localhost:9092 --topic text-sensor_rea
 ########### DB pipeline ##############
 kafka-topics.sh --zookeeper zookeeper:2181 --alter --topic pipeline-event --config retention.ms=1000
 
+# Purge the topic
+kafka-configs --zookeeper zookeeper:2181 --alter --entity-type topics --entity-name postgres_event_sensor_reading --add-config retention.ms=1000
+kafka-configs --zookeeper zookeeper:2181 --alter --entity-type topics --entity-name postgres_event_sensor_reading --add-config retention.ms=86400000
+
+
 
 
 ########### Misc
