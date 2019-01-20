@@ -80,7 +80,7 @@ public class AvroTests {
 
         // setup producer
         String topic = "customer-flink";
-        String brokerList = "192.168.1.151:9092";
+        String brokerList = "localhost:29092";
         String registryUrl = "http://192.168.1.151:8081";
         int identityMapCapacity = 1000;
 
@@ -112,7 +112,7 @@ public class AvroTests {
         DataStream<Customer> customerStream = env.fromElements(customer1, customer2);
 
         //serialize avro
-        ConfluentAvroSerializationSchema serializationSchema = new ConfluentAvroSerializationSchema<Customer>(topic, "http://192.168.1.151:8081", 1000);
+        ConfluentAvroSerializationSchema serializationSchema = new ConfluentAvroSerializationSchema<Customer>(topic, "http://localhost:8081", 1000);
 
         //write to kafka
         FlinkKafkaProducer011<Customer> producer011 = new FlinkKafkaProducer011<Customer>(brokerList, topic, serializationSchema);
