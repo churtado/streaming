@@ -7,10 +7,10 @@ docker run --rm influxdb influxd config > influxdb.conf
 # run influx container with the network so that it can communicate with chronograf
 # make sure the config is mounted to the container
 # start the container with the network
-docker run -d -p 7021:7021 --net=influxdb -v /home/bodhi/docker-images/tick_stack/influxdb.conf:/etc/influxdb/influxdb.conf:ro influxdb -config /etc/influxdb/influxdb.conf
+docker run -d -p 8086:8086 --name=influxdb --net=influxdb influxdb
 
 # run chronograf detached on the same network
-docker run -d -p 8888:8888 --net=influxdb -v chronograf:/var/lib/chronograf chronograf --influxdb-url=http://influxdb:7021
+docker run -d -p 8888:8888 --net=influxdb -v chronograf:/var/lib/chronograf chronograf --influxdb-url=http://influxdb:8086
 
 # connect postgres to the confluent network so that confluent can interact with postgres
 # docker network connect <network> <container_name>

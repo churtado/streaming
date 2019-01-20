@@ -19,11 +19,21 @@ kafka-console-consumer --bootstrap-server localhost:9092 --topic text-sensor_rea
 ########### DB pipeline ##############
 kafka-topics.sh --zookeeper zookeeper:2181 --alter --topic pipeline-event --config retention.ms=1000
 
+# Create connectors
+# See insomnia
+
 # Purge the topic
 kafka-configs --zookeeper zookeeper:2181 --alter --entity-type topics --entity-name postgres_event_sensor_reading --add-config retention.ms=1000
 kafka-configs --zookeeper zookeeper:2181 --alter --entity-type topics --entity-name postgres_event_sensor_reading --add-config retention.ms=86400000
 
+########### Setup influxdb ##############
+# run influxdb if not running
+docker run -d -p 8086:8086 --net=influxdb influxdb
 
+# run influx
+docker exec -it influxdb influx
+# create a user
+CREATE USER admin WITH PASSWORD 'password' WITH ALL PRIVILEGES;
 
 
 ########### Misc
