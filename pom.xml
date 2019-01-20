@@ -21,7 +21,8 @@
 		<module>kafka-connect-github</module>
 		<module>kafka-avro</module>
 		<module>flink-202</module>
-	</modules>
+        <module>sensor-demo</module>
+    </modules>
 	<packaging>pom</packaging>
 
 	<name>Flink - Kafka Examples</name>

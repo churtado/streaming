@@ -1,0 +1,13 @@
+{
+     "type": "record",
+     "namespace": "com.github.churtado.sensor.avro",
+     "name": "SensorReading",
+     "version": "1",
+     "fields": [
+       { "name": "reading_id", "type": "int", "doc": "Monotonically ascending integer id of sensor readings" },
+       { "name": "reading_guid", "type": [ "string", "null" ], "default": "null", "doc": "GUID of a reading within the context of an execution of the reading generator app" },
+       { "name": "reading_timestamp", "type": [ "long", "null" ], "default": "null", "doc": "Epoch timestamp that represents the time at which the reading was made" },
+       { "name": "reading_value", "type": [ "double", "null" ], "default": "null", "doc": "Value registered by the sensor" },
+       { "name": "reading_description", "type": [ "string", "null" ], "default": "null", "doc": "Description of the reading for additional context" }
+     ]
+}
