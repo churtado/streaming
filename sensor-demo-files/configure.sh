@@ -1,5 +1,5 @@
-Create the database in postgres using the scripts.sql file
-Hook up the ETL's to the database
+# Create the database in postgres using the scripts.sql file
+# Hook up the ETL's to the database
 
 ########### Source to text ###########
 # Purge the topic with legacy commands
@@ -15,16 +15,21 @@ kafka-configs --zookeeper zookeeper:2181 --alter --entity-type topics --entity-n
 
 # Create a console consumer
 kafka-console-consumer --bootstrap-server localhost:9092 --topic text-sensor_reading --from-beginning
+kafka-console-consumer --bootstrap-server localhost:9092 --topic postgres_event_avro_sensor_reading --from-beginning
 
 ########### DB pipeline ##############
 kafka-topics.sh --zookeeper zookeeper:2181 --alter --topic pipeline-event --config retention.ms=1000
 
 # Create connectors
-# See insomnia
+# See insomnia: text, source, sink and avro connectors need to be created
 
-# Purge the topic
+# Purge the topics
 kafka-configs --zookeeper zookeeper:2181 --alter --entity-type topics --entity-name postgres_event_sensor_reading --add-config retention.ms=1000
 kafka-configs --zookeeper zookeeper:2181 --alter --entity-type topics --entity-name postgres_event_sensor_reading --add-config retention.ms=86400000
+
+kafka-configs --zookeeper zookeeper:2181 --alter --entity-type topics --entity-name postgres_event_avro_sensor_reading --add-config retention.ms=1000
+kafka-configs --zookeeper zookeeper:2181 --alter --entity-type topics --entity-name postgres_event_avro_sensor_reading --add-config retention.ms=86400000
+
 
 ########### Setup influxdb ##############
 # run influxdb if not running
@@ -42,7 +47,6 @@ kafka-topics --zookeeper zookeeper:2181 --create --topic twitter_tweets --partit
 
 
 ########### Misc
-To purge a kafka topic, set its retention policy to 1 second:
-kafka-topics.sh --zookeeper zookeeper:2181 --alter --topic pipeline-event --config retention.ms=1000
-Set it to one day:
-kafka-topics.sh --zookeeper zookeeper:2181 --alter --topic pipeline-event --config retention.ms=86400000
+# In case you want to only look at logs for one Confluent component
+docker-compose up | grep connect > /var/log/connect.log &
+tail -f /var/log/connect.log
