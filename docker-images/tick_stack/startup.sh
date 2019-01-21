@@ -11,11 +11,3 @@ docker run -d -p 8086:8086 --name=influxdb --net=influxdb influxdb
 
 # run chronograf detached on the same network
 docker run -d -p 8888:8888 --net=influxdb -v chronograf:/var/lib/chronograf chronograf --influxdb-url=http://influxdb:8086
-
-# connect postgres to the confluent network so that confluent can interact with postgres
-# docker network connect <network> <container_name>
-docker network connect cpallinone_default postgres_db_1
-
-# inspect the ip of the connected container
-# docker network inspect <network>
-docker network inspect cpallinone_default
