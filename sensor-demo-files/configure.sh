@@ -33,6 +33,7 @@ kafka-configs --zookeeper zookeeper:2181 --alter --entity-type topics --entity-n
 kafka-configs --zookeeper zookeeper:2181 --alter --entity-type topics --entity-name postgres_event_avro_sensor_reading --add-config retention.ms=86400000
 
 kafka-configs --zookeeper zookeeper:2181 --alter --entity-type topics --entity-name json_sensor_readings --add-config retention.ms=1000
+kafka-configs --zookeeper zookeeper:2181 --alter --entity-type topics --entity-name smoke_alerts --add-config retention.ms=300000
 
 
 ########### NOTE: if the container exists, use docker start
@@ -53,7 +54,8 @@ kafka-topics --zookeeper zookeeper:2181 --create --topic twitter_tweets --partit
 # See this and run: https://github.com/churtado/sensor_reading.git
 
 ########### Retention policy on influxdb
-CREATE RETENTION POLICY one_hour ON sensor_readings DURATION 1h0m0s REPLICATION 1 SHARD DURATION 1h0m0s DEFAULT
+CREATE RETENTION POLICY one_hour ON sensor_readings DURATION 1h0m0s REPLICATION 1 SHARD DURATION 1h0m0s
+CREATE RETENTION POLICY autogen ON sensor_readings DURATION 1h0m0s REPLICATION 1 SHARD DURATION 1h0m0s DEFAULT
 
 
 ########### Misc
