@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Create the database in postgres using the scripts.sql file
 # Hook up the ETL's to the database
 
@@ -28,8 +29,13 @@ kafka-configs --zookeeper zookeeper:2181 --alter --entity-type topics --entity-n
 kafka-configs --zookeeper zookeeper:2181 --alter --entity-type topics --entity-name postgres_event_sensor_reading --add-config retention.ms=86400000
 
 kafka-configs --zookeeper zookeeper:2181 --alter --entity-type topics --entity-name postgres_event_avro_sensor_reading --add-config retention.ms=1000
+kafka-configs --zookeeper zookeeper:2181 --alter --entity-type topics --entity-name postgres_event_avro_sensor_reading --add-config retention.ms=300000
 kafka-configs --zookeeper zookeeper:2181 --alter --entity-type topics --entity-name postgres_event_avro_sensor_reading --add-config retention.ms=86400000
 
+kafka-configs --zookeeper zookeeper:2181 --alter --entity-type topics --entity-name json_sensor_readings --add-config retention.ms=1000
+
+
+########### NOTE: if the container exists, use docker start
 
 ########### Setup influxdb ##############
 # run influxdb if not running
@@ -43,7 +49,11 @@ CREATE USER admin WITH PASSWORD 'password' WITH ALL PRIVILEGES;
 ########### Setup twitter topic ##############
 kafka-topics --zookeeper zookeeper:2181 --create --topic twitter_tweets --partitions 6 --replication-factor 1
 
+########### Setup flink
+# See this and run: https://github.com/churtado/sensor_reading.git
 
+########### Retention policy on influxdb
+CREATE RETENTION POLICY one_hour ON sensor_readings DURATION 1h0m0s REPLICATION 1 SHARD DURATION 1h0m0s DEFAULT
 
 
 ########### Misc

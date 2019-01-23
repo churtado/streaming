@@ -507,6 +507,21 @@
       <to>Get System Info</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>JSON output</from>
+      <to>Kafka producer</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Get System Info</from>
+      <to>Select values</to>
+      <enabled>N</enabled>
+    </hop>
+    <hop>
+      <from>Select values</from>
+      <to>JSON output</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
   <step>
     <name>Generate Rows</name>
@@ -607,6 +622,240 @@
     <GUI>
       <xloc>768</xloc>
       <yloc>128</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>JSON output</name>
+    <type>JsonOutput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <outputValue>outputValue</outputValue>
+    <jsonBloc>data</jsonBloc>
+    <nrRowsInBloc>1</nrRowsInBloc>
+    <operation_type>outputvalue</operation_type>
+    <compatibility_mode>N</compatibility_mode>
+    <encoding>UTF-8</encoding>
+    <addtoresult>N</addtoresult>
+    <file>
+      <name />
+      <extention>js</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <create_parent_folder>N</create_parent_folder>
+      <DoNotOpenNewFileInit>N</DoNotOpenNewFileInit>
+      <servlet_output>N</servlet_output>
+    </file>
+    <fields>
+      <field>
+        <name>reading_guid</name>
+        <element>reading_guid</element>
+      </field>
+      <field>
+        <name>reading_description</name>
+        <element>reading_description</element>
+      </field>
+      <field>
+        <name>reading_value</name>
+        <element>reading_value</element>
+      </field>
+      <field>
+        <name>sensor_id</name>
+        <element>sensor_id</element>
+      </field>
+      <field>
+        <name>reading_timestamp</name>
+        <element>reading_timestamp</element>
+      </field>
+    </fields>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>960</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Kafka producer</name>
+    <type>KafkaProducerOutput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connectionType>DIRECT</connectionType>
+    <directBootstrapServers>localhost:29092</directBootstrapServers>
+    <clusterName />
+    <topic>json_sensor_readings</topic>
+    <clientId />
+    <keyField>reading_guid</keyField>
+    <messageField>outputValue</messageField>
+    <advancedConfig>
+      <option property="compression.type" value="none" />
+      <option property="ssl.key.password" value="" />
+      <option property="ssl.keystore.location" value="" />
+      <option property="ssl.keystore.password" value="" />
+      <option property="ssl.truststore.location" value="" />
+      <option property="ssl.truststore.password" value="" />
+    </advancedConfig>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1152</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>reading_guid</name>
+      </field>
+      <field>
+        <name>reading_description</name>
+      </field>
+      <field>
+        <name>reading_value</name>
+      </field>
+      <field>
+        <name>sensor_id</name>
+      </field>
+      <field>
+        <name>reading_timestamp</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>reading_guid</name>
+        <rename>reading_guid</rename>
+        <type>None</type>
+        <length>36</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>reading_description</name>
+        <rename>reading_description</rename>
+        <type>None</type>
+        <length>13</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>reading_value</name>
+        <rename>reading_value</rename>
+        <type>None</type>
+        <length>10</length>
+        <precision>5</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>sensor_id</name>
+        <rename>sensor_id</rename>
+        <type>None</type>
+        <length>-2</length>
+        <precision>0</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+      <meta>
+        <name>reading_timestamp</name>
+        <rename>reading_timestamp</rename>
+        <type>Integer</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask />
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale />
+        <date_format_timezone />
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding />
+        <decimal_symbol />
+        <grouping_symbol />
+        <currency_symbol />
+        <storage_type />
+      </meta>
+    </fields>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>768</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
