@@ -22,3 +22,10 @@ CREATE TABLE tweets (
 );
 
 ALTER TABLE tweets ADD CONSTRAINT constraint_name UNIQUE (id);
+
+
+CREATE TABLE sensor_info (
+ sensor_id serial primary key,
+ sensor_model text,
+ managed_by text
+);
