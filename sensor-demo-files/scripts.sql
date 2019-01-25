@@ -1,3 +1,9 @@
+# InfluxDB
+# admin/password
+CREATE DATABASE sensor_readings;
+
+# Postgres
+# admin/password
 DROP TABLE IF EXISTS "sensor_reading";
 DROP SEQUENCE IF EXISTS sensor_reading_reading_id_seq;
 
@@ -26,6 +32,13 @@ ALTER TABLE tweets ADD CONSTRAINT constraint_name UNIQUE (id);
 
 CREATE TABLE sensor_info (
  sensor_id serial primary key,
- sensor_model text,
- managed_by text
+ sensor_model TEXT NOT NULL,
+ managed_by TEXT NOT NULL,
 );
+
+CREATE TABLE sensor_pressure
+(
+  sensor_id DOUBLE PRECISION
+, pressure NUMERIC(15, 5)
+);
+CREATE INDEX idx_sensor_pressure_lookup ON sensor_pressure(sensor_id);

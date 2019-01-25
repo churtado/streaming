@@ -1,0 +1,706 @@
+{
+	"_type": "export",
+	"__export_format": 3,
+	"__export_date": "2019-01-24T20:18:06.774Z",
+	"__export_source": "insomnia.desktop.app:v6.3.2",
+	"resources": [
+		{
+			"_id": "wrk_aec821aafd714dbab89199477fc6df65",
+			"created": 1546804803366,
+			"description": "",
+			"modified": 1546804803366,
+			"name": "Insomnia",
+			"parentId": null,
+			"_type": "workspace"
+		},
+		{
+			"_id": "wrk_2d108ed7457f4bbaa8c91626a5f421cf",
+			"created": 1546805052158,
+			"description": "Rest API for confluent",
+			"modified": 1546993207740,
+			"name": "Confluent",
+			"parentId": null,
+			"_type": "workspace"
+		},
+		{
+			"_id": "env_a85b35822c60470583548eb3ebf64d1b",
+			"color": null,
+			"created": 1546804803402,
+			"data": {},
+			"isPrivate": false,
+			"metaSortKey": 1546804803402,
+			"modified": 1546804803402,
+			"name": "New Environment",
+			"parentId": "wrk_aec821aafd714dbab89199477fc6df65",
+			"_type": "environment"
+		},
+		{
+			"_id": "jar_421a94a2ae094961aa0eea87678646bf",
+			"cookies": [],
+			"created": 1546804803403,
+			"modified": 1546804803403,
+			"name": "Default Jar",
+			"parentId": "wrk_aec821aafd714dbab89199477fc6df65",
+			"_type": "cookie_jar"
+		},
+		{
+			"_id": "env_b1f83c12e37047cc897c156fe391abff",
+			"color": null,
+			"created": 1546805052178,
+			"data": {},
+			"isPrivate": false,
+			"metaSortKey": 1546805052178,
+			"modified": 1546805052178,
+			"name": "New Environment",
+			"parentId": "wrk_2d108ed7457f4bbaa8c91626a5f421cf",
+			"_type": "environment"
+		},
+		{
+			"_id": "jar_2dc72b5a00664d9b994fe259cee07d3e",
+			"cookies": [],
+			"created": 1546805052181,
+			"modified": 1546805052181,
+			"name": "Default Jar",
+			"parentId": "wrk_2d108ed7457f4bbaa8c91626a5f421cf",
+			"_type": "cookie_jar"
+		},
+		{
+			"_id": "fld_20ff24c9454a4ef0b7ee51a6cd6b1854",
+			"created": 1547645448889,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1547645448889,
+			"modified": 1547645448889,
+			"name": "schema registry",
+			"parentId": "wrk_2d108ed7457f4bbaa8c91626a5f421cf",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_a153ec008a724aa3bc26e95045b2e070",
+			"created": 1548021713425,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1548021713425,
+			"modified": 1548021731420,
+			"name": "kafka connect",
+			"parentId": "wrk_2d108ed7457f4bbaa8c91626a5f421cf",
+			"_type": "request_group"
+		},
+		{
+			"_id": "env_f6436391d9bf4103abfe982da334bcc6",
+			"color": "#7d69cb",
+			"created": 1546993089007,
+			"data": {
+				"connect_base_url": "http://localhost:8083",
+				"schema_registry_base_url": "http://localhost:8081"
+			},
+			"isPrivate": false,
+			"metaSortKey": 1546993089007,
+			"modified": 1547645664960,
+			"name": "confluent",
+			"parentId": "env_b1f83c12e37047cc897c156fe391abff",
+			"_type": "environment"
+		},
+		{
+			"_id": "fld_15ebfeedaa624f1db4d63d66e3ddfa26",
+			"created": 1548106218268,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1548106218268,
+			"modified": 1548106218268,
+			"name": "avro postgres schema",
+			"parentId": "fld_20ff24c9454a4ef0b7ee51a6cd6b1854",
+			"_type": "request_group"
+		},
+		{
+			"_id": "req_47ad7939e05e4e1aac754be47e77f72a",
+			"authentication": {},
+			"body": {},
+			"created": 1548021097456,
+			"description": "Registering a schema with the confluent schema registry based on https://docs.confluent.io/current/schema-registry/docs/schema_registry_tutorial.html",
+			"headers": [
+				{
+					"id": "pair_7062055bbde34b4383762b3ab5bc4e5d",
+					"name": "Accept",
+					"value": "application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json, application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1546993134674,
+			"method": "GET",
+			"modified": 1548106186219,
+			"name": "get subjects",
+			"parameters": [],
+			"parentId": "fld_20ff24c9454a4ef0b7ee51a6cd6b1854",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ schema_registry_base_url  }}/subjects",
+			"_type": "request"
+		},
+		{
+			"_id": "req_4d81aed49a794f29b3791435a5a358bd",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n  \"compatibility\": \"FULL\"\n}"
+			},
+			"created": 1548022201008,
+			"description": "Registering a schema with the confluent schema registry based on https://docs.confluent.io/current/schema-registry/docs/schema_registry_tutorial.html",
+			"headers": [
+				{
+					"id": "pair_7062055bbde34b4383762b3ab5bc4e5d",
+					"name": "Accept",
+					"value": "application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json, application/json"
+				},
+				{
+					"id": "pair_cf0e9ea5d470436eb907d80e02ec6929",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1546993134624,
+			"method": "PUT",
+			"modified": 1548022278837,
+			"name": "update global compatibility level",
+			"parameters": [],
+			"parentId": "fld_20ff24c9454a4ef0b7ee51a6cd6b1854",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ schema_registry_base_url  }}/config",
+			"_type": "request"
+		},
+		{
+			"_id": "fld_b7907df7de844c7b9226b6f1949c2be8",
+			"created": 1547645465322,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1548021661484,
+			"modified": 1548021723329,
+			"name": "text connector",
+			"parentId": "fld_a153ec008a724aa3bc26e95045b2e070",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_b5c6d7615cc841d486d25c8d1513377e",
+			"created": 1548021606760,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1548021661534,
+			"modified": 1548021721544,
+			"name": "data replication",
+			"parentId": "fld_a153ec008a724aa3bc26e95045b2e070",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_178e34b5a7db42349892d8c860286a2f",
+			"created": 1548021661584,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1548021661584,
+			"modified": 1548021718374,
+			"name": "avro stream connector",
+			"parentId": "fld_a153ec008a724aa3bc26e95045b2e070",
+			"_type": "request_group"
+		},
+		{
+			"_id": "req_73914563829446dcad17b1f242c5f267",
+			"authentication": {},
+			"body": {},
+			"created": 1547908130382,
+			"description": "Remember that you have to make sure the containers can see each other. I documented the docker network connect command on how to connect a container to a specific network",
+			"headers": [
+				{
+					"id": "pair_6a6ad5053a854c64b4bc9c02041a7c2a",
+					"name": "",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1548021661634,
+			"method": "GET",
+			"modified": 1548021739456,
+			"name": "get list of connectors",
+			"parameters": [],
+			"parentId": "fld_a153ec008a724aa3bc26e95045b2e070",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ connect_base_url  }}/connectors",
+			"_type": "request"
+		},
+		{
+			"_id": "req_70956a67e5024c58adbf344d7255ca54",
+			"authentication": {},
+			"body": {},
+			"created": 1548106226928,
+			"description": "Registering a schema with the confluent schema registry based on https://docs.confluent.io/current/schema-registry/docs/schema_registry_tutorial.html",
+			"headers": [
+				{
+					"id": "pair_7062055bbde34b4383762b3ab5bc4e5d",
+					"name": "Accept",
+					"value": "application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json, application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1546993134649,
+			"method": "GET",
+			"modified": 1548106266924,
+			"name": "get version list",
+			"parameters": [],
+			"parentId": "fld_15ebfeedaa624f1db4d63d66e3ddfa26",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ schema_registry_base_url  }}/subjects/postgres_event_avro_sensor_reading-value/versions",
+			"_type": "request"
+		},
+		{
+			"_id": "req_735d77d97f2d4cb787ebcdd3ca634a54",
+			"authentication": {},
+			"body": {},
+			"created": 1548106289401,
+			"description": "Registering a schema with the confluent schema registry based on https://docs.confluent.io/current/schema-registry/docs/schema_registry_tutorial.html",
+			"headers": [
+				{
+					"id": "pair_7062055bbde34b4383762b3ab5bc4e5d",
+					"name": "Accept",
+					"value": "application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json, application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1546993134636.5,
+			"method": "DELETE",
+			"modified": 1548106307054,
+			"name": "delete subject",
+			"parameters": [],
+			"parentId": "fld_15ebfeedaa624f1db4d63d66e3ddfa26",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ schema_registry_base_url  }}/subjects/postgres_event_avro_sensor_reading-value",
+			"_type": "request"
+		},
+		{
+			"_id": "req_55fb295d264843b0bc0a8f9e58efa07b",
+			"authentication": {},
+			"body": {},
+			"created": 1548106319803,
+			"description": "Registering a schema with the confluent schema registry based on https://docs.confluent.io/current/schema-registry/docs/schema_registry_tutorial.html",
+			"headers": [
+				{
+					"id": "pair_7062055bbde34b4383762b3ab5bc4e5d",
+					"name": "Accept",
+					"value": "application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json, application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1546993134642.75,
+			"method": "GET",
+			"modified": 1548106378197,
+			"name": "get schema and version",
+			"parameters": [],
+			"parentId": "fld_15ebfeedaa624f1db4d63d66e3ddfa26",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ schema_registry_base_url  }}/subjects/postgres_event_avro_sensor_reading-value/versions/1",
+			"_type": "request"
+		},
+		{
+			"_id": "req_d6a1b6e2168a4474bf7afb903c90cb93",
+			"authentication": {},
+			"body": {},
+			"created": 1548106381074,
+			"description": "Registering a schema with the confluent schema registry based on https://docs.confluent.io/current/schema-registry/docs/schema_registry_tutorial.html",
+			"headers": [
+				{
+					"id": "pair_7062055bbde34b4383762b3ab5bc4e5d",
+					"name": "Accept",
+					"value": "application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json, application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1546993134639.625,
+			"method": "GET",
+			"modified": 1548106396140,
+			"name": "get schema",
+			"parameters": [],
+			"parentId": "fld_15ebfeedaa624f1db4d63d66e3ddfa26",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ schema_registry_base_url  }}/subjects/postgres_event_avro_sensor_reading-value/versions/1/schema",
+			"_type": "request"
+		},
+		{
+			"_id": "req_91124c78e91546ed9f3731fba7275912",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{ \n\t\"name\": \"sensor-text\", \n\t\"config\": { \n\t\t\"connector.class\": \"io.confluent.connect.jdbc.JdbcSourceConnector\", \n\t\t\"tasks.max\": 1, \n\t\t\"connection.url\": \"jdbc:postgresql://postgres_db_1/events?user=postgres&password=password\", \n\t\t\"mode\": \"incrementing\", \n\t\t\"incrementing.column.name\": \"reading_id\", \n\t\t\"topic.prefix\": \"text-\", \n\t\t\"name\": \"sensor-text\",\n\t\t\"value.converter\": \"org.apache.kafka.connect.storage.StringConverter\"\n\t} \n}"
+			},
+			"created": 1547603240028,
+			"description": "Remember that you have to make sure the containers can see each other. I documented the docker network connect command on how to connect a container to a specific network",
+			"headers": [
+				{
+					"id": "pair_6a6ad5053a854c64b4bc9c02041a7c2a",
+					"name": "",
+					"value": "application/json"
+				},
+				{
+					"id": "pair_6c39e266c2e04e4786fb86d07cbd7e2b",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1547603240028,
+			"method": "POST",
+			"modified": 1547920086292,
+			"name": "text source connector v1",
+			"parameters": [],
+			"parentId": "fld_b7907df7de844c7b9226b6f1949c2be8",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ connect_base_url  }}/connectors",
+			"_type": "request"
+		},
+		{
+			"_id": "req_2afe943d0dbe44f9b920c01fe93742f7",
+			"authentication": {},
+			"body": {},
+			"created": 1547869328815,
+			"description": "Remember that you have to make sure the containers can see each other. I documented the docker network connect command on how to connect a container to a specific network",
+			"headers": [
+				{
+					"id": "pair_6a6ad5053a854c64b4bc9c02041a7c2a",
+					"name": "",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1547298187376,
+			"method": "DELETE",
+			"modified": 1547869375062,
+			"name": "delete text connector",
+			"parameters": [],
+			"parentId": "fld_b7907df7de844c7b9226b6f1949c2be8",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ connect_base_url  }}/connectors/sensor-text",
+			"_type": "request"
+		},
+		{
+			"_id": "req_fc158ddc64964157801bf9eeb129e509",
+			"authentication": {},
+			"body": {},
+			"created": 1547908159264,
+			"description": "Remember that you have to make sure the containers can see each other. I documented the docker network connect command on how to connect a container to a specific network",
+			"headers": [
+				{
+					"id": "pair_6a6ad5053a854c64b4bc9c02041a7c2a",
+					"name": "",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1547546042655.75,
+			"method": "GET",
+			"modified": 1548021754326,
+			"name": "text connector details",
+			"parameters": [],
+			"parentId": "fld_b7907df7de844c7b9226b6f1949c2be8",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ connect_base_url  }}/connectors/sensor-text",
+			"_type": "request"
+		},
+		{
+			"_id": "req_824f37c3d51b4530b3c3bf509a456149",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{ \n\t\"name\": \"sensor-sink\", \n\t\"config\": { \n\t\t\"connector.class\": \"io.confluent.connect.jdbc.JdbcSinkConnector\", \n\t\t\"tasks.max\": 1, \n\t\t\"connection.url\": \"jdbc:postgresql://postgres_db_1/sink?user=postgres&password=password\", \n\t\t\"topics\": \"postgres_event_sensor_reading\",\n\t\t\"auto.create\": \"true\",\n\t\t\"insert.mode\": \"upsert\",\n\t\t\"batch.size\": \"50\",\n\t\t\"pk.mode\" : \"record_value\",\n\t\t\"pk.fields\": \"reading_id\"\n\t} \n}"
+			},
+			"created": 1547920094958,
+			"description": "Remember that you have to make sure the containers can see each other. I documented the docker network connect command on how to connect a container to a specific network",
+			"headers": [
+				{
+					"id": "pair_6a6ad5053a854c64b4bc9c02041a7c2a",
+					"name": "",
+					"value": "application/json"
+				},
+				{
+					"id": "pair_6c39e266c2e04e4786fb86d07cbd7e2b",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1547565108496.5,
+			"method": "POST",
+			"modified": 1548021620859,
+			"name": "sensor sink connector",
+			"parameters": [],
+			"parentId": "fld_b5c6d7615cc841d486d25c8d1513377e",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ connect_base_url  }}/connectors",
+			"_type": "request"
+		},
+		{
+			"_id": "req_c2406fd263db4bfeb0ee1943fa8190b9",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{ \n\t\"name\": \"sensor-source\", \n\t\"config\": { \n\t\t\"connector.class\": \"io.confluent.connect.jdbc.JdbcSourceConnector\", \n\t\t\"tasks.max\": 1, \n\t\t\"connection.url\": \"jdbc:postgresql://postgres_db_1/events?user=postgres&password=password\", \n\t\t\"mode\": \"timestamp\", \n\t\t\"timestamp.column.name\": \"reading_timestamp\", \n\t\t\"topic.prefix\": \"postgres_event_\", \n\t\t\"name\": \"sensor-source\"\n\t} \n}"
+			},
+			"created": 1547920097628,
+			"description": "Remember that you have to make sure the containers can see each other. I documented the docker network connect command on how to connect a container to a specific network",
+			"headers": [
+				{
+					"id": "pair_6a6ad5053a854c64b4bc9c02041a7c2a",
+					"name": "",
+					"value": "application/json"
+				},
+				{
+					"id": "pair_6c39e266c2e04e4786fb86d07cbd7e2b",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1547565108484,
+			"method": "POST",
+			"modified": 1548021643796,
+			"name": "sensor source connector",
+			"parameters": [],
+			"parentId": "fld_b5c6d7615cc841d486d25c8d1513377e",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ connect_base_url  }}/connectors",
+			"_type": "request"
+		},
+		{
+			"_id": "req_8f5ab0e6bb1c4c60ba4333b1fe5d365c",
+			"authentication": {},
+			"body": {},
+			"created": 1547946760745,
+			"description": "Remember that you have to make sure the containers can see each other. I documented the docker network connect command on how to connect a container to a specific network",
+			"headers": [
+				{
+					"id": "pair_6a6ad5053a854c64b4bc9c02041a7c2a",
+					"name": "",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1547565108459,
+			"method": "DELETE",
+			"modified": 1548021639278,
+			"name": "delete sink connector",
+			"parameters": [],
+			"parentId": "fld_b5c6d7615cc841d486d25c8d1513377e",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ connect_base_url  }}/connectors/sensor-sink",
+			"_type": "request"
+		},
+		{
+			"_id": "req_315c9e0da1d14317a5f1e8c9bf8ef6a9",
+			"authentication": {},
+			"body": {},
+			"created": 1547946937048,
+			"description": "Remember that you have to make sure the containers can see each other. I documented the docker network connect command on how to connect a container to a specific network",
+			"headers": [
+				{
+					"id": "pair_6a6ad5053a854c64b4bc9c02041a7c2a",
+					"name": "",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1547565108452.75,
+			"method": "DELETE",
+			"modified": 1548021641386,
+			"name": "delete source connector",
+			"parameters": [],
+			"parentId": "fld_b5c6d7615cc841d486d25c8d1513377e",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ connect_base_url  }}/connectors/sensor-source",
+			"_type": "request"
+		},
+		{
+			"_id": "req_b7e6a26e41f94b32acd0df537fd8aac1",
+			"authentication": {},
+			"body": {},
+			"created": 1548019791519,
+			"description": "Remember that you have to make sure the containers can see each other. I documented the docker network connect command on how to connect a container to a specific network",
+			"headers": [
+				{
+					"id": "pair_6a6ad5053a854c64b4bc9c02041a7c2a",
+					"name": "",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1547565108471.5,
+			"method": "GET",
+			"modified": 1548021626256,
+			"name": "sensor source details",
+			"parameters": [],
+			"parentId": "fld_b5c6d7615cc841d486d25c8d1513377e",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ connect_base_url  }}/connectors/sensor-source",
+			"_type": "request"
+		},
+		{
+			"_id": "req_e835a067cc8c4894aff4d2f375e57004",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{ \n\t\"name\": \"sensor-source-avro\", \n\t\"config\": { \n\t\t\"connector.class\": \"io.confluent.connect.jdbc.JdbcSourceConnector\", \n\t\t\"tasks.max\": 1, \n\t\t\"connection.url\": \"jdbc:postgresql://postgres_db_1/events?user=postgres&password=password\", \n\t\t\"mode\": \"timestamp\", \n\t\t\"timestamp.column.name\": \"reading_timestamp\", \n\t\t\"topic.prefix\": \"postgres_event_avro_\", \n\t\t\"name\": \"sensor-source-avro\",\n\t\t\"key.converter\": \"io.confluent.connect.avro.AvroConverter\",\n\t\t\"key.converter.schema.registry.url\": \"http://schema-registry:8081\",\n\t\t\"value.converter\": \"io.confluent.connect.avro.AvroConverter\",\n\t\t\"value.converter.schema.registry.url\": \"http://schema-registry:8081\"\n\t} \n}"
+			},
+			"created": 1548019927484,
+			"description": "Remember that you have to make sure the containers can see each other. I documented the docker network connect command on how to connect a container to a specific network",
+			"headers": [
+				{
+					"id": "pair_6c39e266c2e04e4786fb86d07cbd7e2b",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1547546042655.75,
+			"method": "POST",
+			"modified": 1548023352126,
+			"name": "sensor source avro connector",
+			"parameters": [],
+			"parentId": "fld_178e34b5a7db42349892d8c860286a2f",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ connect_base_url  }}/connectors",
+			"_type": "request"
+		},
+		{
+			"_id": "req_bccd1f7390184b86a32a2945def177f0",
+			"authentication": {},
+			"body": {},
+			"created": 1548022073331,
+			"description": "Remember that you have to make sure the containers can see each other. I documented the docker network connect command on how to connect a container to a specific network",
+			"headers": [
+				{
+					"id": "pair_6a6ad5053a854c64b4bc9c02041a7c2a",
+					"name": "",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1547546042705.75,
+			"method": "GET",
+			"modified": 1548022325695,
+			"name": "get details",
+			"parameters": [],
+			"parentId": "fld_178e34b5a7db42349892d8c860286a2f",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ connect_base_url  }}/connectors/sensor-source-avro",
+			"_type": "request"
+		},
+		{
+			"_id": "req_c52d096d1e474c5cbad89778f1f58eaf",
+			"authentication": {},
+			"body": {},
+			"created": 1548022307879,
+			"description": "Remember that you have to make sure the containers can see each other. I documented the docker network connect command on how to connect a container to a specific network",
+			"headers": [
+				{
+					"id": "pair_6a6ad5053a854c64b4bc9c02041a7c2a",
+					"name": "",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1547546042680.75,
+			"method": "DELETE",
+			"modified": 1548022358372,
+			"name": "delete",
+			"parameters": [],
+			"parentId": "fld_178e34b5a7db42349892d8c860286a2f",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ connect_base_url  }}/connectors/sensor-source-avro",
+			"_type": "request"
+		}
+	]
+}

@@ -46,6 +46,8 @@ docker run -d -p 8086:8086 --net=influxdb influxdb
 docker exec -it influxdb influx
 # create a user
 CREATE USER admin WITH PASSWORD 'password' WITH ALL PRIVILEGES;
+# create the database
+CREATE DATABASE sensor_readings;
 
 ########### Setup twitter topic ##############
 kafka-topics --zookeeper zookeeper:2181 --create --topic twitter_tweets --partitions 6 --replication-factor 1
